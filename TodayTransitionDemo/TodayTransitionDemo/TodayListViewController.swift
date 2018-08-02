@@ -29,10 +29,11 @@ class TodayListViewController: UIViewController {
     }
     
     lazy var listTableView: UITableView = {
-        let listTV = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        let listTV = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         listTV.delegate = self
         listTV.dataSource = self
         listTV.separatorStyle = .none
+        listTV.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 25))
         return listTV
     }()
     
@@ -83,8 +84,24 @@ extension TodayListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.bgImageView.image = UIImage.init(named: model.image)
         cell.titleLabel.text = model.title
         cell.contentLabel.text = model.content
+        
         cell.shouldGroupAccessibilityChildren = true
         cell.transform = CGAffineTransform.init(scaleX: 1, y: 1)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let cell = tableView.cellForRow(at: indexPath)
+        UIView.animate(withDuration: 0.2) {
+            cell?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        UIView.animate(withDuration: 0.2) {
+            cell?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+        }
     }
 }
