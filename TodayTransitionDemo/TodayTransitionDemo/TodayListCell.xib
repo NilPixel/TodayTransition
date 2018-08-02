@@ -22,8 +22,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-vS-RhB">
                         <rect key="frame" x="20" y="0.0" width="280" height="401.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a4o-2q-0Ym">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="401.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a4o-2q-0Ym">
+                                <rect key="frame" x="0.0" y="10" width="280" height="381.5"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVn-N7-DkD">
                                 <rect key="frame" x="15" y="20" width="250" height="30"/>
@@ -48,9 +53,9 @@
                             <constraint firstAttribute="trailing" secondItem="zVn-N7-DkD" secondAttribute="trailing" constant="15" id="UB2-hd-IsX"/>
                             <constraint firstItem="zVn-N7-DkD" firstAttribute="top" secondItem="t8j-vS-RhB" secondAttribute="top" constant="20" id="ZTj-mG-fL9"/>
                             <constraint firstItem="TIV-am-fQj" firstAttribute="leading" secondItem="t8j-vS-RhB" secondAttribute="leading" constant="15" id="aTd-FN-FtV"/>
-                            <constraint firstAttribute="bottom" secondItem="a4o-2q-0Ym" secondAttribute="bottom" id="bgn-Tj-kvy"/>
+                            <constraint firstAttribute="bottom" secondItem="a4o-2q-0Ym" secondAttribute="bottom" constant="10" id="bgn-Tj-kvy"/>
                             <constraint firstAttribute="trailing" secondItem="TIV-am-fQj" secondAttribute="trailing" constant="15" id="gXr-DB-CS2"/>
-                            <constraint firstItem="a4o-2q-0Ym" firstAttribute="top" secondItem="t8j-vS-RhB" secondAttribute="top" id="lrf-ya-SVH"/>
+                            <constraint firstItem="a4o-2q-0Ym" firstAttribute="top" secondItem="t8j-vS-RhB" secondAttribute="top" constant="10" id="lrf-ya-SVH"/>
                             <constraint firstItem="zVn-N7-DkD" firstAttribute="leading" secondItem="t8j-vS-RhB" secondAttribute="leading" constant="15" id="rd2-4d-hHb"/>
                             <constraint firstAttribute="bottom" secondItem="TIV-am-fQj" secondAttribute="bottom" constant="15" id="zzs-dN-dpB"/>
                         </constraints>
