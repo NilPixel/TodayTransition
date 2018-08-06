@@ -105,3 +105,24 @@ extension TodayListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+
+extension TodayListViewController: UINavigationControllerDelegate, UIViewControllerAnimatedTransitioning {
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self
+    }
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 1.0
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let cell = listTableView.cellForRow(at: listTableView.indexPathForSelectedRow!)
+        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+        
+    }
+    
+    
+    
+}
