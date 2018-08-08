@@ -118,11 +118,51 @@ extension TodayListViewController: UINavigationControllerDelegate, UIViewControl
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let cell = listTableView.cellForRow(at: listTableView.indexPathForSelectedRow!)
+        let cell = listTableView.cellForRow(at: listTableView.indexPathForSelectedRow!) as! TodayListCell
         let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+        let toView = toVC?.value(forKeyPath: "headerImageView") as! UIView
+        let fromView = cell.bgView
+        let containerView = transitionContext.containerView
+        let snapShotView = UIImageView.init(image: cell.bgImageView.image)
         
+        snapShotView.frame = containerView.convert((fromView?.frame)!, from: fromView?.superview)
+        fromView?.isHidden = true
+        
+        toVC?.view.frame = transitionContext.finalFrame(for: toVC!)
+        toVC?.view.alpha = 0
+        toView.isHidden = true
+        
+        let titleLabel = UILabel.init(frame: CGRect(x: 15, y: 20, width: SCREEN_WIDTH - 30, height: 30))
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        titleLabel.text = cell.titleLabel.text
+        
+        let contentLabel = UILabel.init(frame: CGRect(x: 15, y: (SCREEN_WIDTH - 40) * 1.3 - 30, width: SCREEN_WIDTH - 44, height: 15))
+        contentLabel.textColor = UIColor.white
+        contentLabel.textAlignment = .left
+        contentLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        contentLabel.text = cell.contentLabel.text
+        contentLabel.alpha = 0.5
+        
+        snapShotView.addSubview(titleLabel)
+        snapShotView.addSubview(contentLabel)
+        containerView.addSubview((toVC?.view)!)
+        containerView.addSubview(snapShotView)
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: .curveLinear, animations: {
+            containerView.layoutIfNeeded()
+            toVC?.view.alpha = 1.0
+            
+            snapShotView.frame = containerView.convert(toView.frame, to: toView.superview)
+            titleLabel.frame = CGRect(x: 22, y: 30, width: self.SCREEN_WIDTH - 30, height: 30)
+            contentLabel.frame = CGRect(x: 22, y: self.SCREEN_WIDTH*1.3-30, width: self.SCREEN_WIDTH*1.3-44, height: 15)
+        }) { (finished) in
+            toView.isHidden = false
+            fromView?.isHidden = false
+            snapShotView.removeFromSuperview()
+            self.listTableView.reloadData()
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
     }
-    
-    
-    
 }
