@@ -10,6 +10,7 @@ import UIKit
 
 class TodayListItemModel: NSObject {
     var title = ""
+    var titleTwo = ""
     var content = ""
     var image = ""
 }
